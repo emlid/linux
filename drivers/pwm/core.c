@@ -581,12 +581,6 @@ int pwm_apply_state(struct pwm_device *pwm, const struct pwm_state *state)
 
 	chip = pwm->chip;
 
-	if (state->period == pwm->state.period &&
-	    state->duty_cycle == pwm->state.duty_cycle &&
-	    state->polarity == pwm->state.polarity &&
-	    state->enabled == pwm->state.enabled)
-		return 0;
-
 	if (chip->ops->apply) {
 		err = chip->ops->apply(chip, pwm, state);
 		if (err)
@@ -627,17 +621,14 @@ int pwm_apply_state(struct pwm_device *pwm, const struct pwm_state *state)
 			pwm->state.polarity = state->polarity;
 		}
 
-		if (state->period != pwm->state.period ||
-		    state->duty_cycle != pwm->state.duty_cycle) {
-			err = chip->ops->config(pwm->chip, pwm,
-						state->duty_cycle,
-						state->period);
-			if (err)
-				return err;
+		err = chip->ops->config(pwm->chip, pwm,
+					     state->duty_cycle,
+					     state->period);
+		if (err)
+			return err;
 
-			pwm->state.duty_cycle = state->duty_cycle;
-			pwm->state.period = state->period;
-		}
+		pwm->state.duty_cycle = state->duty_cycle;
+		pwm->state.period = state->period;
 
 		if (state->enabled != pwm->state.enabled) {
 			if (state->enabled) {
