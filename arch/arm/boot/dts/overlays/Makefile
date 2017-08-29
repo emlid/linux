@@ -199,6 +199,7 @@ dtbo-$(CONFIG_ARCH_BCM2835) += \
 	wittypi.dtbo
 
 dtbo-$(CONFIG_ARCH_BCM2835) += spi0-4cs.dtbo
+dtbo-$(CONFIG_ARCH_BCM2835) += navio-rgb.dtbo
 
 targets += dtbs dtbs_install
 targets += $(dtbo-y)
