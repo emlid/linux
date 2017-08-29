@@ -198,6 +198,8 @@ dtbo-$(CONFIG_ARCH_BCM2835) += \
 	w5500.dtbo \
 	wittypi.dtbo
 
+dtbo-$(CONFIG_ARCH_BCM2835) += spi0-4cs.dtbo
+
 targets += dtbs dtbs_install
 targets += $(dtbo-y)
 
