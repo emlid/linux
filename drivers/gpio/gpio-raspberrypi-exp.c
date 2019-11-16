@@ -219,7 +219,7 @@ static int rpi_exp_gpio_probe(struct platform_device *pdev)
 	rpi_gpio->gc.label = MODULE_NAME;
 	rpi_gpio->gc.owner = THIS_MODULE;
 	rpi_gpio->gc.of_node = np;
-	rpi_gpio->gc.base = -1;
+	rpi_gpio->gc.base = RPI_EXP_GPIO_BASE;
 	rpi_gpio->gc.ngpio = NUM_GPIO;
 
 	rpi_gpio->gc.direction_input = rpi_exp_gpio_dir_in;
